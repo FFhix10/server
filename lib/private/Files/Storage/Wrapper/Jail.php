@@ -303,7 +303,7 @@ class Jail extends Wrapper {
 	 *
 	 * @param string $path
 	 * @param string $mode
-	 * @return resource
+	 * @return resource|bool
 	 */
 	public function fopen($path, $mode) {
 		return $this->getWrapperStorage()->fopen($this->getUnjailedPath($path), $mode);
