@@ -49,6 +49,7 @@ use OCP\Files\Cache\ICacheEntry;
 use OCP\Files\Mount\IMountPoint;
 use OCP\Files\Storage;
 use OCP\ILogger;
+use function is_array;
 
 class Encryption extends Wrapper {
 	use LocalTempFileTrait;
@@ -136,7 +137,7 @@ class Encryption extends Wrapper {
 	 * The result for filesize when called on a folder is required to be 0
 	 *
 	 * @param string $path
-	 * @return int
+	 * @return int|bool
 	 */
 	public function filesize($path) {
 		$fullPath = $this->getFullPath($path);
@@ -213,7 +214,7 @@ class Encryption extends Wrapper {
 	 * see https://www.php.net/manual/en/function.file_get_contents.php
 	 *
 	 * @param string $path
-	 * @return string
+	 * @return string|bool
 	 */
 	public function file_get_contents($path) {
 		$encryptionModule = $this->getEncryptionModule($path);
@@ -491,6 +492,7 @@ class Encryption extends Wrapper {
 	 * @return int unencrypted size
 	 */
 	protected function verifyUnencryptedSize($path, $unencryptedSize) {
+		/** @var int $size */
 		$size = $this->storage->filesize($path);
 		$result = $unencryptedSize;
 
@@ -763,8 +765,8 @@ class Encryption extends Wrapper {
 				throw $e;
 			}
 			if ($result) {
-				if ($preserveMtime) {
-					$this->touch($targetInternalPath, $sourceStorage->filemtime($sourceInternalPath));
+				if ($preserveMtime && is_int($mtime = $sourceStorage->filemtime($sourceInternalPath))) {
+					$this->touch($targetInternalPath, $mtime);
 				}
 				$this->updateEncryptedVersion($sourceStorage, $sourceInternalPath, $targetInternalPath, $isRename, false);
 			} else {
@@ -782,7 +784,7 @@ class Encryption extends Wrapper {
 	 * The local version of the file can be temporary and doesn't have to be persistent across requests
 	 *
 	 * @param string $path
-	 * @return string
+	 * @return string|bool
 	 */
 	public function getLocalFile($path) {
 		if ($this->encryptionManager->isEnabled()) {
@@ -811,10 +813,13 @@ class Encryption extends Wrapper {
 	 * only the following keys are required in the result: size and mtime
 	 *
 	 * @param string $path
-	 * @return array
+	 * @return array|bool
 	 */
 	public function stat($path) {
 		$stat = $this->storage->stat($path);
+		if (!is_array($stat)) {
+			return $stat;
+		}
 		$fileSize = $this->filesize($path);
 		$stat['size'] = $fileSize;
 		$stat[7] = $fileSize;
