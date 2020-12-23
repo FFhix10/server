@@ -217,11 +217,11 @@ class Encryption extends Wrapper {
 	/**
 	 * Load the source from the stream context and return the context options
 	 *
-	 * @param string $name
+	 * @param string|null $name
 	 * @return array
 	 * @throws \BadMethodCallException
 	 */
-	protected function loadContext($name) {
+	protected function loadContext($name = null) {
 		$context = parent::loadContext($name);
 
 		foreach ($this->expectedContextProperties as $property) {
@@ -314,7 +314,7 @@ class Encryption extends Wrapper {
 		}
 		return $result;
 	}
-	
+
 	/**
 	 * stream_read_block
 	 *
