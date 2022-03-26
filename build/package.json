@@ -9,7 +9,9 @@
   "private": true,
   "homepage": "https://github.com/nextcloud/",
   "contributors": [],
-  "dependencies": {},
+  "dependencies": {
+    "@snyk/protect": "latest"
+  },
   "devDependencies": {
     "handlebars": "^4.7.6",
     "jasmine-core": "~2.5.2",
@@ -26,5 +28,10 @@
     "phantomjs-prebuilt": "*",
     "sinon": "<= 5.0.7"
   },
-  "engine": "node >= 6.9"
+  "engine": "node >= 6.9",
+  "scripts": {
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
+  },
+  "snyk": true
 }

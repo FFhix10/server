@@ -1,0 +1,40 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.22.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - karma > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - karma-coverage > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - karma-phantomjs-launcher > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - node-sass > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - jsdoc > catharsis > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - jsdoc > requizzle > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - karma > combine-lists > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - node-sass > sass-graph > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/traverse > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - node-sass > gaze > globule > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - sinon > nise > @sinonjs/formatio > @sinonjs/samsam > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/traverse > @babel/generator > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - karma-viewport > @types/karma > log4js > streamroller > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - jasmine-sinon > sinon > nise > @sinonjs/formatio > @sinonjs/samsam > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - karma-viewport > @types/karma > log4js > streamroller > async > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
+    - karma-coverage > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
+        patched: '2022-03-26T20:13:36.517Z'
